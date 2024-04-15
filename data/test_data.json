@@ -1,0 +1,5 @@
+[
+  { "basket": ["GR1", "GR1"], "total_price": 3.11 },
+  { "basket": ["SR1", "SR1", "GR1", "SR1"], "total_price": 16.61 },
+  { "basket": ["GR1", "CF1", "SR1", "CF1", "CF1"], "total_price": 30.57 }
+]

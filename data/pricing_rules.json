@@ -1,0 +1,5 @@
+[
+  { "type": "BOGO", "product_code": "GR1" },
+  { "type": "BulkDiscount", "product_code": "SR1", "threshold": 3, "discount_price": 4.50 },
+  { "type": "BulkDiscount", "product_code": "CF1", "threshold": 3, "discount_percent": 0.33333 }
+]
