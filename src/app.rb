@@ -11,6 +11,9 @@ class App
 
     # Retrieve the products loaded by the register
     @products = @register.products
+
+    # Retrieve the cart from the register
+    @cart = @register.cart
   end
 
   def start
@@ -36,7 +39,7 @@ class App
         @register.add_to_cart(@products[product_index], product_quantity)
 
         # Display the current cart
-        @register.display_cart
+        @user_interface.display_cart(@cart)
       when '2'
         # Checks out the cart and displays the total price
         puts ''

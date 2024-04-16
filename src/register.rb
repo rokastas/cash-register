@@ -22,18 +22,4 @@ class Register
     # Increment the quantity of the product in the cart
     @cart[product] += quantity
   end
-
-  def display_cart
-    puts "--------------- Your Cart ---------------"
-    if @cart.empty?
-      puts "Your cart is empty."
-    else
-      @cart.each do |product, quantity|
-        puts "#{product.name} (#{quantity}x) - ??? €"
-      end
-    end
-    puts "-----------------------------------------"
-    puts "Total: ??? €"
-    puts ""
-  end
 end
