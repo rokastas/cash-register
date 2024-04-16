@@ -1,4 +1,3 @@
-require_relative 'product'
 require_relative 'register'
 require_relative 'user_interface'
 
@@ -9,6 +8,9 @@ class App
 
     # Create a new instance of the register
     @register = Register.new
+
+    # Retrieve the products loaded by the register
+    @products = @register.products
   end
 
   def start
