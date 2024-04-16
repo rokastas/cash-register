@@ -7,7 +7,7 @@ RSpec.describe App do
       app = App.new
 
       # Retrieve the products loaded by the register
-      products = app.instance_variable_get(:@register).instance_variable_get(:@products)
+      products = app.instance_variable_get(:@products)
 
       expect(products).not_to be_empty
       expect(products.map(&:code)).to include('GR1', 'SR1', 'CF1')
