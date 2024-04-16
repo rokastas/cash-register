@@ -25,7 +25,7 @@ class App
       user_action = @user_interface.ask_for_action
 
       case user_action
-      when '1'
+      when '1' # Add products to cart
         # Displays the list of products
         @user_interface.display_products(@products)
 
@@ -40,13 +40,11 @@ class App
 
         # Display the current cart
         @user_interface.display_cart(@cart)
-      when '2'
-        # Checks out the cart and displays the total price
+      when '2' # Checkout cart and display total price
         puts ''
         puts 'Checking out the cart...'
         puts ''
-      when '3'
-        # Exits the program
+      when '3' # Exit program
         puts ''
         puts 'Exiting the program...'
         puts ''
