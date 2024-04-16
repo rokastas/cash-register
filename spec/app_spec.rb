@@ -1,9 +1,13 @@
 require_relative '../src/app'
 
 RSpec.describe App do
-  describe '#load_products' do
-    it 'loads products from the JSON file' do
-      products = Product.all
+  describe '#initialize' do
+    it 'initializes the register with products' do
+      # Create a new instance of the App class
+      app = App.new
+
+      # Retrieve the products loaded by the register
+      products = app.instance_variable_get(:@register).instance_variable_get(:@products)
 
       expect(products).not_to be_empty
       expect(products.map(&:code)).to include('GR1', 'SR1', 'CF1')
