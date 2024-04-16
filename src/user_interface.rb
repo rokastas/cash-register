@@ -1,7 +1,7 @@
 class User_interface
   def display_welcome_message
     puts '-------------------------------------------'
-    puts '----- Welcome to the Checkout System -----'
+    puts '------ Welcome to the Checkout System -----'
     puts '-------------------------------------------'
     puts ''
   end
@@ -9,8 +9,7 @@ class User_interface
   def ask_for_action
     puts 'Please select an action:'
     puts '1. Add products to cart'
-    puts '2. Checkout cart'
-    puts '3. Exit program'
+    puts '2. Checkout and exit'
     print '> '
     gets.chomp
   end
@@ -37,7 +36,7 @@ class User_interface
 
   def display_cart(cart)
     puts ''
-    puts '--------------- Your Cart ---------------'
+    puts '---------------- Your Cart ----------------'
     if cart.empty?
       puts 'Your cart is empty.'
     else
@@ -45,7 +44,7 @@ class User_interface
         puts "#{product.name} (#{quantity}x) - ??? €"
       end
     end
-    puts '-----------------------------------------'
+    puts '-------------------------------------------'
     puts 'Total: ??? €'
     puts ''
   end

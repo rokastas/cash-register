@@ -40,14 +40,9 @@ class App
 
         # Display the current cart
         @user_interface.display_cart(@cart)
-      when '2' # Checkout cart and display total price
-        puts ''
-        puts 'Checking out the cart...'
-        puts ''
-      when '3' # Exit program
-        puts ''
-        puts 'Exiting the program...'
-        puts ''
+      when '2' # Checkout the cart and exit
+        @user_interface.display_cart(@cart)
+        puts 'Goodbye!'
         break
       else
         puts ''
