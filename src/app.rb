@@ -11,9 +11,6 @@ class App
 
     # Retrieve the products loaded by the register
     @products = @register.products
-
-    # Retrieve the cart from the register
-    @cart = @register.cart
   end
 
   def start
@@ -25,29 +22,32 @@ class App
       user_action = @user_interface.ask_for_action
 
       case user_action
-      when '1' # Add products to cart
-        # Displays the list of products
-        @user_interface.display_products(@products)
+        when '1' # Add products to cart
+          # Displays the list of products
+          @user_interface.display_products(@products)
 
-        # Asks the user for the product index
-        product_index = @user_interface.ask_for_product_index.to_i - 1
+          # Asks the user for the product index
+          product_index = @user_interface.ask_for_product_index.to_i - 1
 
-        # Ask the user for the quantity
-        product_quantity = @user_interface.ask_for_product_quantity.to_i
+          # Ask the user for the quantity
+          product_quantity = @user_interface.ask_for_product_quantity.to_i
 
-        # Add the product to the cart
-        @register.add_to_cart(@products[product_index], product_quantity)
+          # Add the product to the cart
+          @register.add_to_cart(@products[product_index], product_quantity)
 
-        # Display the current cart
-        @user_interface.display_cart(@cart)
-      when '2' # Checkout the cart and exit
-        @user_interface.display_cart(@cart)
-        puts 'Goodbye!'
-        break
-      else
-        puts ''
-        puts 'Invalid action. Please try again.'
-        puts ''
+          # Display the current cart
+          @user_interface.display_cart(@register.cart, @register.total_price)
+
+        when '2' # Checkout the cart and exit
+
+          @user_interface.display_cart(@register.cart, @register.total_price)
+          puts 'Goodbye!'
+          break
+
+        else
+          puts ''
+          puts 'Invalid action. Please try again.'
+          puts ''
       end
     end
   end

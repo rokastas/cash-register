@@ -34,7 +34,7 @@ class User_interface
     gets.chomp
   end
 
-  def display_cart(cart)
+  def display_cart(cart, total_price)
     puts ''
     puts '---------------- Your Cart ----------------'
     if cart.empty?
@@ -45,7 +45,7 @@ class User_interface
       end
     end
     puts '-------------------------------------------'
-    puts 'Total: ??? €'
+    puts "Total: #{total_price} €"
     puts ''
   end
 end
