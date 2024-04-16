@@ -23,11 +23,20 @@ class App
 
       case user_action
       when '1'
-        # Displays the list of products, lets the user select a product
-        # (and its quantity) to add to the cart
-        puts ''
-        puts 'Adding products to the cart...'
-        puts ''
+        # Displays the list of products
+        @user_interface.display_products(@products)
+
+        # Asks the user for the product index
+        product_index = @user_interface.ask_for_product_index.to_i - 1
+
+        # Ask the user for the quantity
+        product_quantity = @user_interface.ask_for_product_quantity.to_i
+
+        # Add the product to the cart
+        @register.add_to_cart(@products[product_index], product_quantity)
+
+        # Display the current cart
+        @register.display_cart
       when '2'
         # Checks out the cart and displays the total price
         puts ''
