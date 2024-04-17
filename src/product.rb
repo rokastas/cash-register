@@ -18,6 +18,9 @@ class Product
     @products = products_hash.map do |product_data|
       new(product_data['code'], product_data['name'], product_data['price'])
     end
+  rescue Errno::ENOENT, JSON::ParserError => e
+    puts "Error loading products: #{e.message}"
+    []
   end
 
   def self.all
