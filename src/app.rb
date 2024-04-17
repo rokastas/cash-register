@@ -38,7 +38,14 @@ class App
           # Display the current cart
           @user_interface.display_cart(@register)
 
-        when '2' # Checkout the cart and exit
+        when '2' # Remove products from cart
+          # Displays the list of products in the cart
+          # Asks the user for the product index to remove
+          # Asks the user for the quantity to remove
+          # Remove the product from the cart
+          # Display the current cart
+
+        when '3' # Checkout the cart and exit
 
           @user_interface.display_cart(@register)
           puts 'Goodbye!'

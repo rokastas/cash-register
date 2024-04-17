@@ -30,6 +30,34 @@ RSpec.describe Register do
     end
   end
 
+  describe '#remove_from_cart' do
+    it 'removes a product from the cart, decrements its quantity' do
+      register = Register.new
+      product = register.products.first
+      register.add_to_cart(product, 2)
+      register.remove_from_cart(product, 1)
+
+      expect(register.cart).to eq({ product => 1 })
+    end
+
+    it 'removes a product completely from the cart if quantity becomes 0' do
+      register = Register.new
+      product = register.products.first
+      register.add_to_cart(product, 1)
+      register.remove_from_cart(product, 1)
+
+      expect(register.cart).to eq({})
+    end
+
+    it 'does not remove a product if it is not in the cart' do
+      register = Register.new
+      product = register.products.first
+      register.remove_from_cart(product)
+
+      expect(register.cart).to eq({})
+    end
+  end
+
   describe '#total_cart_price' do
     it 'returns the total price of two items' do
       register = Register.new
