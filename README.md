@@ -16,15 +16,15 @@ ruby src/app.rb
 
 Follow the on-screen prompts to interact with the program:
 ```
-  Enter the number of the product:
-  > (insert the product number and press Enter)
+Enter the number of the product:
+> (insert the product number and press Enter)
 ```
 
 ## **Dependancies**
 The Cash Register Program relies on the following components:
 
-Ruby: The program is written in Ruby and requires Ruby to be installed on your system.
-RSpec Gem (for testing): Used for writing and executing automated tests.
+- Ruby: The program is written in Ruby and requires Ruby to be installed on your system.
+- RSpec Gem (for testing): Used for writing and executing automated tests.
 
 ## **Features**
 - Add products to the cart.
