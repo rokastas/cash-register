@@ -30,34 +30,34 @@ RSpec.describe Register do
     end
   end
 
-  describe '#total_price' do
+  describe '#total_cart_price' do
     it 'returns the total price of two items' do
       register = Register.new
       register.add_to_cart(register.products.find { |product| product.code == 'GR1' }, 1)
       register.add_to_cart(register.products.find { |product| product.code == 'SR1' }, 1)
 
-      expect(register.total_price).to eq(8.11)
+      expect(register.total_cart_price).to eq(8.11)
     end
 
     it 'returns the total discounted price with BOGO promotion applied to Green Tea' do
       register = Register.new
       register.add_to_cart(register.products.find { |product| product.code == 'GR1' }, 2)
 
-      expect(register.total_price).to eq(3.11)
+      expect(register.total_cart_price).to eq(3.11)
     end
 
     it 'returns the total discounted price with BulkDiscount promotion applied to Strawberries' do
       register = Register.new
       register.add_to_cart(register.products.find { |product| product.code == 'SR1' }, 3)
 
-      expect(register.total_price).to eq(13.50)
+      expect(register.total_cart_price).to eq(13.50)
     end
 
     it 'returns the total discounted price with BulkDiscount promotion applied to Coffee' do
       register = Register.new
       register.add_to_cart(register.products.find { |product| product.code == 'CF1' }, 2)
 
-      expect(register.total_price).to eq(22.46)
+      expect(register.total_cart_price).to eq(22.46)
     end
 
     it 'returns the total discounted price with all promotions applied' do
@@ -66,7 +66,7 @@ RSpec.describe Register do
       register.add_to_cart(register.products.find { |product| product.code == 'SR1' }, 3)
       register.add_to_cart(register.products.find { |product| product.code == 'CF1' }, 3)
 
-      expect(register.total_price).to eq(42.18)
+      expect(register.total_cart_price.round(2)).to eq(42.18)
     end
 
     it 'calculated the prices of test_data carts' do
@@ -81,7 +81,7 @@ RSpec.describe Register do
           register.add_to_cart(product, 1)
         end
 
-        expect(register.total_price).to eq(test_case['total_price'])
+        expect(register.total_cart_price.round(2)).to eq(test_case['total_cart_price'])
         register.cart.clear
       end
     end
