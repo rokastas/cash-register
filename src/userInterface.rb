@@ -100,4 +100,9 @@ class UserInterface
 
     message
   end
+
+  def display_invalid_action_message
+    puts 'Invalid action. Please enter a valid action number.'
+    puts ''
+  end
 end
