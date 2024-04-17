@@ -36,14 +36,15 @@ Cash Register
 ├── data/                       # Directory containing JSON data files
 │   ├── pricing_rules.json      # Data file for storing pricing rules and discounts
 │   ├── products.json           # Data file for storing product information
-│   └── test_data.json          # Data file for storing the
+│   └── test_data.json          # Data file for storing the test data for the system integration test
 │
 ├── spec/                       # Directory containing RSpec test files
 │   ├── register_spec.rb        # RSpec tests for the Register class
 │   ├── userInterface_spec.rb   # RSpec tests for the UserInterface class
 │   └── product_spec.rb         # RSpec tests for the Product class
 │
-└── Gemfile                     # File specifying Ruby gem dependencies
+├── Gemfile                     # File specifying Ruby gem dependencies
+└── README.md                   # Project README file
 ```
 
 
@@ -116,6 +117,6 @@ The codebase in a shared folder we can access or a public git repository
 - A proper readme with good explanation
 
 
-## **Author**
+# **Author**
 
 Made with ❤️, 🍵 and 🥵 by [Rokas Stasiulis](https://github.com/rokastas)
