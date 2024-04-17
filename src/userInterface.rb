@@ -26,10 +26,11 @@ class UserInterface
     puts 'Enter the number of the product you want to add: '
     print '> '
     product_index = gets.chomp.to_i
-    if product_index >= 1 && product_index <= products_length
+    if product_index >= 1 && product_index <= products_length && product_index.is_a?(Integer)
       product_index - 1
     else
-      puts "Invalid product index. Please enter a number between 1 and #{products_length}."
+      puts "Invalid product index. Please enter a whole number between 1 and #{products_length}."
+      puts ''
       ask_for_product_index(products_length)
     end
   end
@@ -37,7 +38,14 @@ class UserInterface
   def ask_for_product_quantity
     puts 'Enter the quantity of the product: '
     print '> '
-    gets.chomp
+    product_quantity = gets.chomp.to_i
+    if product_quantity.positive? && product_quantity.is_a?(Integer)
+      product_quantity
+    else
+      puts 'Invalid quantity. Please enter a whole number greater than 0.'
+      puts ''
+      ask_for_product_quantity
+    end
   end
 
   def display_cart(register)
