@@ -22,10 +22,16 @@ class UserInterface
     end
   end
 
-  def ask_for_product_index
+  def ask_for_product_index(products_length)
     puts 'Enter the number of the product you want to add: '
     print '> '
-    gets.chomp
+    product_index = gets.chomp.to_i
+    if product_index >= 1 && product_index <= products_length
+      product_index - 1
+    else
+      puts "Invalid product index. Please enter a number between 1 and #{products_length}."
+      ask_for_product_index(products_length)
+    end
   end
 
   def ask_for_product_quantity

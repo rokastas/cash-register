@@ -27,7 +27,7 @@ class App
           @user_interface.display_products(@products)
 
           # Asks the user for the product index
-          product_index = @user_interface.ask_for_product_index.to_i - 1
+          product_index = @user_interface.ask_for_product_index(@products.length)
 
           # Ask the user for the quantity
           product_quantity = @user_interface.ask_for_product_quantity.to_i
