@@ -1,10 +1,10 @@
 require_relative 'register'
-require_relative 'user_interface'
+require_relative 'userInterface'
 
 class App
   def initialize
     # Create a new instance of the user interface
-    @user_interface = User_interface.new
+    @user_interface = UserInterface.new
 
     # Create a new instance of the register
     @register = Register.new

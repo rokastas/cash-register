@@ -1,6 +1,4 @@
-# require_relative 'register'
-
-class User_interface
+class UserInterface
   def display_welcome_message
     puts '-------------------------------------------------------'
     puts '------------ Welcome to the Checkout System -----------'
