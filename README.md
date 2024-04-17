@@ -9,7 +9,16 @@ To use the program, follow these steps:
 2. Clone this repository to your local machine
 3. Navigate to the project directory
 4. Run bundle install to install dependencies
-5. Run the program using `ruby src/app.rb`
+5. Run the app.rb file using Ruby:
+```
+ruby src/app.rb
+```
+
+Follow the on-screen prompts to interact with the program:
+```
+  Enter the number of the product:
+  > (insert the product number and press Enter)
+```
 
 ## **Dependancies**
 The Cash Register Program relies on the following components:
