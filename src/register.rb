@@ -24,18 +24,11 @@ class Register
     @cart[product] += quantity
   end
 
-  def total_price
-    total_price = 0
-    @cart.each do |product, product_quantity|
-      discounted_price = apply_discount(product.code, product.price, product_quantity)
-      total_price += discounted_price
-    end
-    total_price = ('%.2f' % total_price).to_f
+  def total_price_per_product(product_price, product_quantity)
+    product_price * product_quantity
   end
 
-  private
-
-  def apply_discount(product_code, product_price, product_quantity)
+  def discounted_price_per_product(product_code, product_price, product_quantity)
     pricing_rules_file = File.read('data/pricing_rules.json')
     pricing_rules = JSON.parse(pricing_rules_file)
 
@@ -51,6 +44,14 @@ class Register
       end
     end
 
-    product_quantity * product_price
+    product_price * product_quantity
+  end
+
+  def total_cart_price
+    total_cart_price = 0
+    @cart.each do |product, product_quantity|
+      total_cart_price += discounted_price_per_product(product.code, product.price, product_quantity).to_f
+    end
+    total_cart_price
   end
 end

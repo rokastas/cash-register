@@ -36,11 +36,11 @@ class App
           @register.add_to_cart(@products[product_index], product_quantity)
 
           # Display the current cart
-          @user_interface.display_cart(@register.cart, @register.total_price)
+          @user_interface.display_cart(@register)
 
         when '2' # Checkout the cart and exit
 
-          @user_interface.display_cart(@register.cart, @register.total_price)
+          @user_interface.display_cart(@register)
           puts 'Goodbye!'
           break
 

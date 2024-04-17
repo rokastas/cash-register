@@ -1,8 +1,10 @@
+# require_relative 'register'
+
 class User_interface
   def display_welcome_message
-    puts '-------------------------------------------'
-    puts '------ Welcome to the Checkout System -----'
-    puts '-------------------------------------------'
+    puts '-------------------------------------------------------'
+    puts '------------ Welcome to the Checkout System -----------'
+    puts '-------------------------------------------------------'
     puts ''
   end
 
@@ -18,7 +20,7 @@ class User_interface
     puts ''
     puts 'Select a product:'
     products.each_with_index do |product, index|
-      puts "#{index + 1}. #{product.name} - #{product.price} €"
+      puts "#{index + 1}. #{product.name} - #{format('%.2f', product.price)} €"
     end
   end
 
@@ -34,18 +36,34 @@ class User_interface
     gets.chomp
   end
 
-  def display_cart(cart, total_price)
+  def display_cart(register)
+    cart = register.cart
+    total_cart_price = register.total_cart_price
+
     puts ''
-    puts '---------------- Your Cart ----------------'
+    puts '---------------------- Your Cart ----------------------'
     if cart.empty?
       puts 'Your cart is empty.'
     else
-      cart.each do |product, quantity|
-        puts "#{product.name} (#{quantity}x) - ??? €"
+      cart.each do |product, product_quantity|
+        puts "#{product.name} (#{product_quantity}x) - #{price_per_product_message(register, product, product_quantity)}"
       end
     end
-    puts '-------------------------------------------'
-    puts "Total: #{total_price} €"
+    puts '-------------------------------------------------------'
+    puts "Total: #{format('%.2f', total_cart_price)} €"
     puts ''
+  end
+
+  def price_per_product_message(register, product, product_quantity)
+    discounted_price_per_product = register.discounted_price_per_product(product.code, product.price, product_quantity)
+    total_price_per_product = register.total_price_per_product(product.price, product_quantity)
+
+    message = "#{format('%.2f', discounted_price_per_product)} €"
+
+    if discounted_price_per_product != total_price_per_product
+      message += ", discounted from: #{format('%.2f', total_price_per_product)} €"
+    end
+
+    message
   end
 end
