@@ -24,6 +24,11 @@ class Register
     @cart[product] += quantity
   end
 
+  def remove_from_cart(product, product_quantity_to_remove)
+    @cart[product] -= product_quantity_to_remove
+    @cart.delete(product) if @cart[product].zero?
+  end
+
   def total_price_per_product(product_price, product_quantity)
     product_price * product_quantity
   end

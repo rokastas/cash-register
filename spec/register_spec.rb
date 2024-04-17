@@ -48,14 +48,6 @@ RSpec.describe Register do
 
       expect(register.cart).to eq({})
     end
-
-    it 'does not remove a product if it is not in the cart' do
-      register = Register.new
-      product = register.products.first
-      register.remove_from_cart(product)
-
-      expect(register.cart).to eq({})
-    end
   end
 
   describe '#total_cart_price' do

@@ -39,11 +39,24 @@ class App
           @user_interface.display_cart(@register)
 
         when '2' # Remove products from cart
-          # Displays the list of products in the cart
-          # Asks the user for the product index to remove
-          # Asks the user for the quantity to remove
-          # Remove the product from the cart
-          # Display the current cart
+          if @register.cart.empty?
+            # Displays the list of products in the cart (with your cart is empty message)
+            @user_interface.display_cart(@register)
+          else
+            # Displays the list of products in the cart
+            @user_interface.display_cart(@register)
+            # Asks the user for the product index to remove
+            product_to_remove_index = @user_interface.ask_for_product_index(@register.cart.length)
+            product_to_remove = @register.cart.keys[product_to_remove_index]
+            # Asks the user for the quantity to remove
+            product_quantity_in_cart = @register.cart.values[product_to_remove_index]
+            product_quantity_to_remove = @user_interface.ask_for_product_quantity_to_remove(product_to_remove, product_quantity_in_cart)
+
+            @register.remove_from_cart(product_to_remove, product_quantity_to_remove)
+
+            # Display the current cart
+            @user_interface.display_cart(@register)
+          end
 
         when '3' # Checkout the cart and exit
 
