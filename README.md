@@ -39,7 +39,7 @@ Cash Register
 ├── src/                        # Directory containing source code
 │   ├── app.rb                  # Main entry point of the application
 │   ├── register.rb             # Manages the cart and performs calculations
-│   ├── userInterface.rb        # Handles user interactions and input/output
+│   ├── user_interface.rb       # Handles user interactions and input/output
 │   └── product.rb              # Represents individual products and their attributes
 │
 ├── data/                       # Directory containing JSON data files
@@ -48,9 +48,9 @@ Cash Register
 │   └── test_data.json          # Data file for storing the test data for the system integration test
 │
 ├── spec/                       # Directory containing RSpec test files
-│   ├── register_spec.rb        # RSpec tests for the Register class
-│   ├── userInterface_spec.rb   # RSpec tests for the UserInterface class
-│   └── product_spec.rb         # RSpec tests for the Product class
+│   ├── app_spec.rb             # RSpec tests for the App class
+│   ├── product_spec.rb         # RSpec tests for the Product class
+│   └── register_spec.rb        # RSpec tests for the Register class
 │
 ├── Gemfile                     # File specifying Ruby gem dependencies
 └── README.md                   # Project README file

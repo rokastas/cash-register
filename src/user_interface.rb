@@ -1,4 +1,9 @@
+# This class represents a user interface for interacting with the checkout system.
+
 class UserInterface
+  INVALID_INDEX_MESSAGE = 'Invalid product index. Please enter a whole number no bigger than %d.'.freeze
+  INVALID_QUANTITY_MESSAGE = 'Invalid quantity. Please enter a whole number greater than 0.'.freeze
+
   def display_welcome_message
     puts '---------------------------------------------------------------'
     puts '---------------- Welcome to the Checkout System ---------------'
@@ -33,41 +38,23 @@ class UserInterface
       return product_index - 1 if product_index >= 1 && product_index <= products_length
     end
 
-    puts "Invalid product index. Please enter a whole number smaller or equal to #{products_length}."
+    puts INVALID_INDEX_MESSAGE % products_length
     puts ''
     ask_for_product_index(products_length)
   end
 
-  def ask_for_product_quantity
-    puts 'Enter the quantity of the product: '
+  def ask_for_product_quantity(product_to_remove = nil, product_quantity_in_cart = nil)
+    puts product_quantity_prompt_message(product_to_remove, product_quantity_in_cart)
     print '> '
     product_quantity_input = gets.chomp
 
-    if product_quantity_input.match(/^\d+$/)
-      product_quantity = product_quantity_input.to_i
-      return product_quantity if product_quantity.positive?
+    if product_quantity_input.match(/^\d+$/) &&
+       (product_quantity = product_quantity_input.to_i).positive? &&
+       (!product_to_remove || product_quantity <= product_quantity_in_cart)
+      return product_quantity
     end
 
-    puts 'Invalid quantity. Please enter a whole number greater than 0.'
-    puts ''
-    ask_for_product_quantity
-  end
-
-  def ask_for_product_quantity_to_remove(product_to_remove, product_quantity_in_cart)
-    puts "Enter the quantity of #{product_to_remove.name} to remove (you have #{product_quantity_in_cart} in your cart):"
-    print '> '
-    product_quantity_to_remove_input = gets.chomp
-
-    if product_quantity_to_remove_input.match(/^\d+$/)
-      product_quantity_to_remove = product_quantity_to_remove_input.to_i
-      if product_quantity_to_remove.positive? && product_quantity_to_remove <= product_quantity_in_cart
-        return product_quantity_to_remove
-      end
-    end
-
-    puts "Invalid quantity. Please enter a whole number smaller or equal to #{product_quantity_in_cart}."
-    puts ''
-    ask_for_product_quantity_to_remove(product_to_remove, product_quantity_in_cart)
+    display_invalid_product_quantity_message(product_to_remove, product_quantity_in_cart)
   end
 
   def display_cart(register)
@@ -76,16 +63,28 @@ class UserInterface
 
     puts ''
     puts '-------------------------- Your Cart --------------------------'
+    display_cart_products(cart, register)
+    puts '---------------------------------------------------------------'
+    puts "Total: #{format('%.2f', total_cart_price)} €"
+    puts ''
+  end
+
+  def display_invalid_action_message
+    puts 'Invalid action. Please enter a valid action number.'
+    puts ''
+  end
+
+  private
+
+  def display_cart_products(cart, register)
     if cart.empty?
       puts 'Your cart is empty.'
     else
       cart.each_with_index do |(product, product_quantity), index|
-        puts "#{index + 1}. #{product.name} (#{product_quantity}x) - #{price_per_product_message(register, product, product_quantity)}"
+        puts "#{index + 1}. #{product.name} (#{product_quantity}x) - " \
+        "#{price_per_product_message(register, product, product_quantity)}"
       end
     end
-    puts '---------------------------------------------------------------'
-    puts "Total: #{format('%.2f', total_cart_price)} €"
-    puts ''
   end
 
   def price_per_product_message(register, product, product_quantity)
@@ -101,8 +100,20 @@ class UserInterface
     message
   end
 
-  def display_invalid_action_message
-    puts 'Invalid action. Please enter a valid action number.'
+  def product_quantity_prompt_message(product_to_remove = nil, product_quantity_in_cart = nil)
+    if product_to_remove
+      "Enter the quantity of #{product_to_remove.name} to remove " \
+      "(you have #{product_quantity_in_cart} in your cart):"
+    else
+      'Enter the quantity of the product:'
+    end
+  end
+
+  def display_invalid_product_quantity_message(product_to_remove, product_quantity_in_cart)
+    puts "Invalid quantity. Please enter a whole number " \
+    "#{product_to_remove ? 'no bigger than' : 'greater than'}" \
+    " #{product_to_remove ? product_quantity_in_cart : 0}."
     puts ''
+    ask_for_product_quantity(product_to_remove, product_quantity_in_cart)
   end
 end

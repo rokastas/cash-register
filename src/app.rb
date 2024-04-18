@@ -1,5 +1,5 @@
 require_relative 'register'
-require_relative 'userInterface'
+require_relative 'user_interface'
 
 class App
   def initialize
@@ -44,13 +44,13 @@ class App
 
   def remove_product_from_cart
     if @register.cart.empty?
-      @user_interface.display_empty_cart_message
+      @user_interface.display_cart(@register)
     else
       @user_interface.display_cart(@register)
       product_to_remove_index = @user_interface.ask_for_product_index(@register.cart.length)
       product_to_remove = @register.cart.keys[product_to_remove_index]
       product_quantity_in_cart = @register.cart.values[product_to_remove_index]
-      product_quantity_to_remove = @user_interface.ask_for_product_quantity_to_remove(product_to_remove, product_quantity_in_cart)
+      product_quantity_to_remove = @user_interface.ask_for_product_quantity(product_to_remove, product_quantity_in_cart)
 
       @register.remove_from_cart(product_to_remove, product_quantity_to_remove)
       @user_interface.display_cart(@register)
