@@ -1,6 +1,9 @@
-# This class represents a user interface for interacting with the checkout system.
+# This class represents the user interface for interacting with the checkout system.
+# It provides methods for displaying messages, asking for user input, and displaying the cart.
+# The UserInterface class is used by the App class.
 
 class UserInterface
+  # Define error messages for incorrect user input
   INVALID_INDEX_MESSAGE = 'Invalid product index. Please enter a whole number no bigger than %d.'.freeze
   INVALID_QUANTITY_MESSAGE = 'Invalid quantity. Please enter a whole number greater than 0.'.freeze
 
@@ -38,6 +41,7 @@ class UserInterface
       return product_index - 1 if product_index >= 1 && product_index <= products_length
     end
 
+    # If the input is invalid
     puts INVALID_INDEX_MESSAGE % products_length
     puts ''
     ask_for_product_index(products_length)
@@ -48,12 +52,17 @@ class UserInterface
     print '> '
     product_quantity_input = gets.chomp
 
-    if product_quantity_input.match(/^\d+$/) &&
-       (product_quantity = product_quantity_input.to_i).positive? &&
+    product_quantity = product_quantity_input.to_i
+
+    if product_quantity.positive? &&
+       # Check if the input is a positive whole number
+       product_quantity_input.match(/^\d+$/) &&
+       # If removing a product check that its quantity is no more than in the cart
        (!product_to_remove || product_quantity <= product_quantity_in_cart)
       return product_quantity
     end
 
+    # If the input is invalid
     display_invalid_product_quantity_message(product_to_remove, product_quantity_in_cart)
   end
 
@@ -80,6 +89,7 @@ class UserInterface
     if cart.empty?
       puts 'Your cart is empty.'
     else
+      # Display each product in the cart with its quantity and total price
       cart.each_with_index do |(product, product_quantity), index|
         puts "#{index + 1}. #{product.name} (#{product_quantity}x) - " \
         "#{price_per_product_message(register, product, product_quantity)}"
@@ -88,15 +98,18 @@ class UserInterface
   end
 
   def price_per_product_message(register, product, product_quantity)
-    discounted_price_per_product = register.discounted_price_per_product(product.code, product.price, product_quantity)
-    total_price_per_product = register.total_price_per_product(product.price, product_quantity)
+    discounted_price_per_product = register.discounted_price_per_product(
+      product.code, product.price, product_quantity
+    )
+    total_price_per_product = register.total_price_per_product(
+      product.price, product_quantity
+    )
 
     message = "#{format('%.2f', discounted_price_per_product)} €"
 
     if discounted_price_per_product != total_price_per_product
       message += ", discounted from: #{format('%.2f', total_price_per_product)} €"
     end
-
     message
   end
 
